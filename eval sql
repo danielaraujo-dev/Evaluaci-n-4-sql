@@ -1,0 +1,40 @@
+CREATE TABLE Países(
+	países_id serial PRIMARY KEY,	
+	Nombre_país varchar (150) UNIQUE NOT NULL
+	
+);
+
+CREATE TABLE grupos(
+	Nombre_país varchar (150) UNIQUE NOT NULL,
+	grupo varchar(1),
+	PRIMARY KEY (Nombre_país), FOREIGN KEY(Nombre_país) REFERENCES Países (Nombre_país)
+);
+
+CREATE TABLE clubes (
+	id_club serial PRIMARY KEY,
+	Nombre_club varchar(150) UNIQUE NOT NULL,
+	Nombre_país varchar (150),
+	FOREIGN KEY(Nombre_país) REFERENCES Países (Nombre_país)
+); 
+
+CREATE TABLE Jugador (
+	id_jugador serial PRIMARY KEY, 
+	nombre varchar(30),
+	apellido varchar(30),
+	Nombre_país varchar (150),
+	posición varchar (50),
+	Nombre_club varchar(150), 
+	peso int, 
+	fecha_de_nacimiento int,
+	estatura int,
+	FOREIGN KEY(Nombre_país) REFERENCES Países (Nombre_país),
+	FOREIGN KEY (Nombre_club) REFERENCES clubes (Nombre_club)
+); 
+
+CREATE TABLE Partidos_y_horarios (
+	fecha_partido date, 
+	hora_partido time, 
+	estadio varchar (40),
+	Nombre_país varchar (150),
+	FOREIGN KEY(Nombre_país) REFERENCES Países (Nombre_país)
+);
